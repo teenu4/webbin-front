@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles/index.css';
+import './assets/main.css'
 import App from './components/App'; // Updated path
 import * as serviceWorker from './serviceWorker';
 import { ApolloProvider } from 'react-apollo';
