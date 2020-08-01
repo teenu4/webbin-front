@@ -7,7 +7,7 @@ const scheme = proto => {
 
 export const GRAPHQL_URL = `${scheme(
   "http"
-)}://${API_HOSTNAME}/graphql`;
+)}://${API_HOSTNAME}/api/v1/graphql`;
 export const REALTIME_GRAPHQL_URL = `${scheme(
   "ws"
 )}://${API_HOSTNAME}/graphql`;

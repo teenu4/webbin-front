@@ -1,0 +1,67 @@
+import React, { Component } from 'react';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
+
+
+const WEBSITES_QUERY = gql`
+  query {
+    websites {
+      id
+      name
+      description
+      logoUrl
+      images {
+        id
+        previewUrl
+      }
+    }
+  }
+`;
+class Elements extends Component {
+
+  constructor() {
+    super();
+    this.state = { session: false };
+    //console.log(this.props);
+  }
+  render() {
+    console.log(this.props);
+    return (
+
+      <Query query={WEBSITES_QUERY}>
+        {({ loading, error, data }) => {
+          if (loading) return <div>Fetching..</div>
+          if (error) return <div>Error!</div>
+          return (
+            <div>
+              {data.websites.map((website) => {
+                return <div key={website.id} className="flex flex-wrap mb-4">
+                  <div className="rounded overflow-hidden shadow-lg">
+                    <img className="w-24" src={website.logoUrl} alt="Display" />
+                    <div className="px-6 py-4">
+                      <div className="font-bold text-purple-500 text-xl mb-2">
+                        {website.name}
+                      </div>
+                      <p className="text-gray-700 text-base">
+                        {website.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {website.images.map((image) => {
+                    return <div key={image.id} className="m-4 w-1/4 rounded overflow-hidden shadow-lg">
+                      <div className="px-6 py-4">
+                        <img className="w-24" src={image.previewUrl} alt="Display" />
+                      </div>
+                    </div>
+                  })}
+                </div>
+              })}
+            </div>
+          )
+        }}
+      </Query>
+    )
+  }
+}
+export default Elements;
