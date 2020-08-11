@@ -1,61 +1,92 @@
-import React from 'react';
-import { InMemoryCache } from 'apollo-cache-inmemory'
-import { createUploadLink } from 'apollo-upload-client'
-import {ApolloClient} from "apollo-client"
-import {ApolloProvider, Mutation} from "react-apollo"
-import gql from "graphql-tag"
+import React, { Component } from 'react';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag'; 
 
 
-const UPLOAD_FILE = gql`
-  mutation SingleUpload($file: Upload!) {
-    singleUpload(file: $file) {
-      filename
-      mimetype
-      encoding
+const IMAGE_QUERY = gql`
+  query ($id: ID!) {
+    image(id: $id) {
+      id
+      name
+      desktopUrl
+      tabletUrl
+      mobileUrl
+      website {
+        id
+        name
+        description
+      }
+      patterns {
+        id
+        tag
+      }
+      elements {
+        id
+        tag
+      }
+      flows {
+        id
+        name
+      }
     }
   }
 `;
+class Image extends Component {
 
-const UPLOAD_FILE_STREAM = gql`
-  mutation SingleUploadStream($file: Upload!) {
-    singleUploadStream(file: $file) {
-      filename
-      mimetype
-      encoding
+  constructor() {
+    super();
+    this.state = { session: false };
+    //console.log(this.props);
+  }
+    render() {
+      console.log(this.props);
+      return (
+        
+        <Query query={IMAGE_QUERY}
+        variables={{id: this.props.match.params.id}}>
+          {({ loading, error, data }) => {
+            if (loading) return <div>Fetching..</div>
+            if (error) return <div>Error!</div>
+            return (
+            
+              <div className="flex flex-wrap mb-4">
+                  <div className="rounded overflow-hidden shadow-lg">
+      <img className="w-24" src={data.image.desktopUrl} alt="Display" />
+      <div className="px-6 py-4">
+        <div className="font-bold text-purple-500 text-xl mb-2">
+        {data.image.website.name}
+        </div>
+        <p className="text-gray-700 text-base">
+        {data.image.website.description}
+        </p>
+      </div>
+    </div>    
+                {data.image.elements.map((element) => {
+                  return <div key={element.id} className="m-4 w-1/4 rounded overflow-hidden shadow-lg">
+                    <div className="px-6 py-4">
+                      {element.tag}
+                    </div>
+                  </div>
+                })}
+                {data.image.patterns.map((pattern) => {
+                  return <div key={pattern.id} className="m-4 w-1/4 rounded overflow-hidden shadow-lg">
+                    <div className="px-6 py-4">
+                      {pattern.tag}
+                    </div>
+                  </div>
+                })}
+                {data.image.flows.map((flow) => {
+                  return <div key={flow.id} className="m-4 w-1/4 rounded overflow-hidden shadow-lg">
+                    <div className="px-6 py-4">
+                      {flow.name}
+                    </div>
+                  </div>
+                })}
+              </div>
+            )
+          }}
+        </Query>
+      )
     }
   }
-`;
-
-
-function Image() {
-  return (
-    <div className="Image">
-        <header className="Image-header">
-            <h2>Save Local</h2>
-                <Mutation mutation={UPLOAD_FILE}>
-                    {(singleUpload, { data, loading }) => {
-                        console.log(data)
-                        return (<form onSubmit={() => {console.log("Submitted")}} encType={'multipart/form-data'}>
-                                    <input name={'document'} type={'file'} onChange={({target: { files }}) => {
-                                        const file = files[0]
-                                        file && singleUpload({ variables: { file: file } })
-                                    }}/>{loading && <p>Loading.....</p>}</form>)}
-                    }
-                </Mutation>
-            <h2>Stream to Server</h2>
-                 <Mutation mutation={UPLOAD_FILE_STREAM}>
-                    {(singleUploadStream, { data, loading }) => {
-                        console.log(data)
-                        return (<form onSubmit={() => {console.log("Submitted")}} encType={'multipart/form-data'}>
-                                    <input name={'document'} type={'file'} onChange={({target: { files }}) => {
-                                        const file = files[0]
-                                        file && singleUploadStream({ variables: { file: file } })
-                                    }}/>{loading && <p>Loading.....</p>}</form>)}
-                    }
-                 </Mutation>
-        </header>
-    </div>
-  );
-}
-
-export default Image;
+  export default Image;
