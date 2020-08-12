@@ -1,5 +1,5 @@
 const HASURA_GRAPHQL_ENGINE_HOSTNAME = "localhost:3000";
-const API_HOSTNAME = "localhost:3001";
+const API_HOSTNAME = "storinka.herokuapp.com/";
 
 const scheme = proto => {
   return window.location.protocol === "https:" ? `${proto}s` : proto;
