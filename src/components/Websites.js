@@ -15,7 +15,7 @@ import {
 
 const WEBSITES_QUERY = gql`
   query {
-    websites {
+    allWebsites {
       id
       name
       description

@@ -7,12 +7,14 @@ import auth from "./components/Auth/Auth";
 import LandingPage from "./components/LandingPage/LandingPage";
 import Websites from "./components/Websites";
 import Website from "./components/Website";
-import Patterns from "./components/Patterns";
 import Image from "./components/Image";
+import App from "./components/App";
 import history from "./utils/history";
 
 import { ApolloProvider } from "react-apollo";
 import makeApolloClient from "./apollo";
+import Patterns from "./components/ImagesPatterns";
+import ImagesPatterns from "./components/ImagesPatterns";
 
 let client;
 
@@ -59,7 +61,7 @@ export const makeMainRoutes = () => {
                 <Route
                     exact
                     path="/patterns"
-                    render={props => provideClient(Patterns, props)}
+                    render={props => provideClient(ImagesPatterns, props)}
                 />
                 <Route
                     path="/websites/:id"

@@ -7,7 +7,7 @@ const IMAGE_QUERY = gql`
   query ($id: ID!) {
     image(id: $id) {
       id
-      name
+      displayName
       desktopUrl
       tabletUrl
       mobileUrl

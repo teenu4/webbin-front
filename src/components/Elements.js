@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 
 const ELEMENTS_QUERY = gql`
   query {
-    elements {
+    allElements {
       id
       name
       tag
