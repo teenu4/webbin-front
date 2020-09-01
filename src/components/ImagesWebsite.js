@@ -42,7 +42,7 @@ class ImagesWebsite extends Component {
   }
 
   fetchImages = () => {
-    const { first, skip } = this.state;
+    const { first } = this.state;
     this.setState({ skip: this.state.skip + first });
     this.runImagesQuery();
   };

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 import gql from "graphql-tag";
-import { Navbar, Button } from "tailwind-react-ui";
+import { Button } from "tailwind-react-ui";
 import auth from "../Auth/Auth";
 
 class App extends Component {

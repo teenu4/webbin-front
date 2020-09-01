@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './assets/main.css'
-import App from './components/App'; // Updated path
+// import App from './components/App'; // Updated path
 import * as serviceWorker from './serviceWorker';
 import { ApolloProvider } from 'react-apollo';
 import { ApolloClient } from 'apollo-client';
@@ -9,7 +9,7 @@ import { createHttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloProvider as ApolloHooksProvider } from '@apollo/react-hooks'
 import { UploadFile } from './components/UploadFile';
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 
 const link = createHttpLink({

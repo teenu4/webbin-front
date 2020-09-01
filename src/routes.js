@@ -4,16 +4,16 @@ import { Route, Router } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Callback from "./components/Callback/Callback";
 import auth from "./components/Auth/Auth";
-import LandingPage from "./components/LandingPage/LandingPage";
+// import LandingPage from "./components/LandingPage/LandingPage";
 import Websites from "./components/Websites";
 import Website from "./components/Website";
 import Image from "./components/Image";
-import App from "./components/App";
+// import App from "./components/App";
 import history from "./utils/history";
 
 import { ApolloProvider } from "react-apollo";
 import makeApolloClient from "./apollo";
-import Patterns from "./components/ImagesPatterns";
+// import Patterns from "./components/ImagesPatterns";
 import ImagesPatterns from "./components/ImagesPatterns";
 
 let client;

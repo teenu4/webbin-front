@@ -1,12 +1,13 @@
 import ApolloClient from "apollo-client";
 import { HttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
-import { WebSocketLink } from "apollo-link-ws";
-import { split } from "apollo-link";
-import { getMainDefinition } from "apollo-utilities";
-import { SubscriptionClient } from "subscriptions-transport-ws";
+// import { WebSocketLink } from "apollo-link-ws";
+// import { split } from "apollo-link";
+// import { getMainDefinition } from "apollo-utilities";
+// import { SubscriptionClient } from "subscriptions-transport-ws";
 
-import { GRAPHQL_URL, REALTIME_GRAPHQL_URL } from "./utils/constants.js";
+// import { GRAPHQL_URL, REALTIME_GRAPHQL_URL } from "./utils/constants.js";
+import { GRAPHQL_URL } from "./utils/constants.js";
 import auth from "./components/Auth/Auth";
 
 const getHeaders = () => {
