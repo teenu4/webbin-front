@@ -16,6 +16,9 @@ import makeApolloClient from "./apollo";
 // import Patterns from "./components/ImagesPatterns";
 import ImagesPatterns from "./components/ImagesPatterns";
 
+import Aside from './components/Aside/';
+import Content from './components/Content/'
+
 let client;
 
 const provideClient = (Component, renderProps) => {
@@ -52,7 +55,8 @@ const handleAuthentication = ({ location }) => {
 export const makeMainRoutes = () => {
     return (
         <Router history={history}>
-            <div>
+            
+            {/* <div>
                 <Route
                     exact
                     path="/"
@@ -85,7 +89,13 @@ export const makeMainRoutes = () => {
                         return <Callback {...props} />;
                     }}
                 />
-            </div>
+            </div> */}
+
+
+                <Aside/>
+                <Content/>
+
+            
         </Router>
     );
 };

@@ -4,4 +4,11 @@ module.exports = {
         tailwindcss('./tailwind.js'),
         require('autoprefixer')
     ],
+    theme: {
+        extend: {
+          width: {
+            '6/8': '48.666667%',
+          }
+        }
+      }
 };
