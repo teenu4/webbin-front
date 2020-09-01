@@ -20,7 +20,7 @@ const WEBSITES_QUERY = gql`
       name
       description
       logoUrl
-      images {
+      images(first: 3) {
         id
         previewUrl
       }
@@ -44,7 +44,7 @@ class Elements extends Component {
           if (error) return <div>Error!</div>
           return (
             <div>
-              {data.websites.map((website) => {
+              {data.allWebsites.map((website) => {
                 return <div key={website.id} className="flex flex-wrap mb-4">
                   <div className="rounded overflow-hidden shadow-lg">
                     <img className="w-24" src={website.logoUrl} alt="Display" />
