@@ -1,7 +1,10 @@
-import React, { Component } from 'react';
 import gql from 'graphql-tag';
-import ImagesGrid from './ImagesGrid';
+import React, { Component } from 'react';
+import { IMAGES_PER_PAGE } from '../utils/constants';
 import ImagePatternGridItem from './ImagePatternGridItem';
+import ImagesGrid from './ImagesGrid';
+import HeaderContent from './Content/Header-content';
+import ProductInfo from './Content/Product-Info';
 
 
 const IMAGES_QUERY = gql`
@@ -23,7 +26,7 @@ class ImagesPatterns extends Component {
 
   state = {
     images: [],
-    first: 5,
+    first: IMAGES_PER_PAGE,
     skip: 0,
     hasMore: true
   };
@@ -55,12 +58,18 @@ class ImagesPatterns extends Component {
 
   render() {
     return (
-      <ImagesGrid
+      <div>
+        {/* these components will be moved to parent component */}
+        <HeaderContent/>
+        <ProductInfo/>
+        <ImagesGrid
         hasMore={this.state.hasMore}
         fetchImages={this.fetchImages}
         dataLength={this.state.images.length}
         images={this.state.images}
         itemComponent={ImagePatternGridItem} />
+      </div>
+      
     );
   }
 }

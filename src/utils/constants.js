@@ -1,6 +1,7 @@
 const HASURA_GRAPHQL_ENGINE_HOSTNAME = "localhost:3000";
+//const API_HOSTNAME = "localhost:3001/";
 const API_HOSTNAME = "storinka.herokuapp.com/";
-
+export const IMAGES_PER_PAGE = 5;
 const scheme = proto => {
   return window.location.protocol === "https:" ? `${proto}s` : proto;
 };

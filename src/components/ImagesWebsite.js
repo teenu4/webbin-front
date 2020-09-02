@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import gql from 'graphql-tag';
 import ImagesGrid from './ImagesGrid';
 import ImageWebsiteGridItem from './ImagesWebsiteGridItem';
-
+import { IMAGES_PER_PAGE } from '../utils/constants';
 
 const IMAGES_QUERY = gql`
   query($filter: ImageFilter, $first: Int, $skip: Int) {
@@ -17,7 +17,7 @@ class ImagesWebsite extends Component {
 
   state = {
     images: [],
-    first: 5,
+    first: IMAGES_PER_PAGE,
     skip: 0,
     hasMore: true
   };

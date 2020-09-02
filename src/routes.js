@@ -56,7 +56,6 @@ export const makeMainRoutes = () => {
     return (
         <Router history={history}>
             
-            {/* <div>
                 <Route
                     exact
                     path="/"
@@ -89,11 +88,11 @@ export const makeMainRoutes = () => {
                         return <Callback {...props} />;
                     }}
                 />
-            </div> */}
-
-
-                <Aside/>
-                <Content/>
+                {/* this is mocked temporary route */}
+                <Route
+                    path="/content"
+                    render={props => provideClient(Content, props)}
+                />
 
             
         </Router>

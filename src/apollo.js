@@ -56,6 +56,7 @@ const makeApolloClient = () => {
 
 
   const client = new ApolloClient({
+    shouldBatch: true,
     link: httpLink,
     cache: new InMemoryCache({
       addTypename: true
