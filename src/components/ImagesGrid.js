@@ -30,7 +30,9 @@ class ImagesGrid extends Component {
         <div className="content ml-auto mt-12 px-6">
           <ProductInfo/>
           <div className="flex items-start justify-between flex-wrap">
-              <ImageWebsiteGridItem/>
+            {/* don't call ImageWebsiteGridItem here, it's already rendered in this file,
+            line 25 (this.props.itemComponent) */}
+              {/* <ImageWebsiteGridItem/> */}
           </div>
         </div>
       </>

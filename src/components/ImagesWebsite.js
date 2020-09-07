@@ -10,6 +10,12 @@ const IMAGES_QUERY = gql`
         id
         previewUrl
         displayName
+        website {
+          name
+        }
+        patterns {
+          name
+        }
       }
   }
 `;
