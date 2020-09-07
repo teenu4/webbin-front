@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import ImageWebsiteGridItem from './ImagesWebsiteGridItem';
-import ProductInfo from './Content/Product-Info/'
+import ProductInfo from './Content/ProductInfo/';
 
 
 class ImagesGrid extends Component {

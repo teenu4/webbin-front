@@ -1,7 +1,7 @@
 import React from 'react';
 
 import HeaderContent from './HeaderContent/';
-import ProductInfo from './Product-Info/';
+import ProductInfo from './ProductInfo/';
 import ContentCard from './ContentCard/';
 
 

@@ -5,7 +5,7 @@ import ImagePatternGridItem from './ImagePatternGridItem';
 
 import ImagesGrid from './ImagesGrid';
 import HeaderContent from './Content/HeaderContent';
-import ProductInfo from './Content/Product-Info';
+import ProductInfo from './Content/ProductInfo';
 
 
 const IMAGES_QUERY = gql`
