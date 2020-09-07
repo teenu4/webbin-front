@@ -95,11 +95,6 @@ export const makeMainRoutes = () => {
                     path="/content"
                     render={props => provideClient(Content, props)}
                 />
-
-    <Aside/>
-    <Content/>
-
-            
         </Router>
     );
 };

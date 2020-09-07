@@ -4,6 +4,10 @@ import ImagesGrid from './ImagesGrid';
 import ImageWebsiteGridItem from './ImagesWebsiteGridItem';
 import { IMAGES_PER_PAGE } from '../utils/constants';
 
+import Aside from './Aside/';
+import HeaderContent from './Content/HeaderContent/';
+import ProductInfo from './Content/ProductInfo/';
+
 const IMAGES_QUERY = gql`
   query($filter: ImageFilter, $first: Int, $skip: Int) {
       allImages(first: $first, skip: $skip, filter: $filter) {
@@ -54,13 +58,23 @@ class ImagesWebsite extends Component {
   };
 
   render() {
+    const maxWidth = {
+      width: "calc(100% - 260px)",
+    };
     return (
-      <ImagesGrid
-        hasMore={this.state.hasMore}
-        fetchImages={this.fetchImages}
-        dataLength={this.state.images.length}
-        images={this.state.images}
-        itemComponent={ImageWebsiteGridItem} />
+      <>
+        <Aside/>
+        <div className="ml-auto pl-8 pr-8 pt-8" style={maxWidth}>
+          <HeaderContent/>
+          <ProductInfo/>
+          <ImagesGrid
+            hasMore={this.state.hasMore}
+            fetchImages={this.fetchImages}
+            dataLength={this.state.images.length}
+            images={this.state.images}
+            itemComponent={ImageWebsiteGridItem} />
+        </div>
+      </>
     );
   }
 }
