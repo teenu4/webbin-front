@@ -36,13 +36,13 @@ const provideClient = (Component, renderProps) => {
         );
     } else {
         // not logged in already, hence redirect to login page
-        if (renderProps.match.path !== "/") {
-            window.location.href = "/";
-        } else {
+        // if (renderProps.match.path !== "/") {
+        //     window.location.href = "/";
+        // } else {
             return (<ApolloProvider client={client}>
-                <Component auth={auth} {...renderProps} />
+                <Component auth={auth} {...renderProps} client={client} />
             </ApolloProvider>);
-        }
+        // }
     }
 };
 
