@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Nav from './Aside-nav/';
+import Nav from './AsideNav/';
 
 import './Aside-style.css'
 

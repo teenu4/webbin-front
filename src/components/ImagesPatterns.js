@@ -2,8 +2,9 @@ import gql from 'graphql-tag';
 import React, { Component } from 'react';
 import { IMAGES_PER_PAGE } from '../utils/constants';
 import ImagePatternGridItem from './ImagePatternGridItem';
+
 import ImagesGrid from './ImagesGrid';
-import HeaderContent from './Content/Header-content';
+import HeaderContent from './Content/HeaderContent';
 import ProductInfo from './Content/Product-Info';
 
 

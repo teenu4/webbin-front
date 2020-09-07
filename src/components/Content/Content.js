@@ -1,8 +1,11 @@
 import React from 'react';
 
-import HeaderContent from './Header-content/';
+import HeaderContent from './HeaderContent/';
 import ProductInfo from './Product-Info/';
-import ContentCard from './Content-card/';
+import ContentCard from './ContentCard/';
+
+
+
 
 import './Content-style.css'
 
@@ -12,10 +15,6 @@ const Content = () => {
       <HeaderContent/>
       <ProductInfo/>
       <div className="flex items-start justify-between flex-wrap">
-        <ContentCard/>
-        <ContentCard/>
-        <ContentCard/>
-        <ContentCard/>
         <ContentCard/>
       </div>
     </div>

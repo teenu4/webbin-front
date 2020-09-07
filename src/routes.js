@@ -4,6 +4,7 @@ import { Route, Router } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Callback from "./components/Callback/Callback";
 import auth from "./components/Auth/Auth";
+
 // import LandingPage from "./components/LandingPage/LandingPage";
 import Websites from "./components/Websites";
 import Website from "./components/Website";
@@ -16,8 +17,8 @@ import makeApolloClient from "./apollo";
 // import Patterns from "./components/ImagesPatterns";
 import ImagesPatterns from "./components/ImagesPatterns";
 
+import Content from './components/Content/';
 import Aside from './components/Aside/';
-import Content from './components/Content/'
 
 let client;
 
@@ -89,10 +90,14 @@ export const makeMainRoutes = () => {
                     }}
                 />
                 {/* this is mocked temporary route */}
+                
                 <Route
                     path="/content"
                     render={props => provideClient(Content, props)}
                 />
+
+    <Aside/>
+    <Content/>
 
             
         </Router>
