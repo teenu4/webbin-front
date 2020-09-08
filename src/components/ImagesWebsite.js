@@ -7,6 +7,7 @@ import { IMAGES_PER_PAGE } from '../utils/constants';
 import Aside from './Aside/';
 import HeaderContent from './Content/HeaderContent/';
 import ProductInfo from './Content/ProductInfo/';
+import Elements from './Websites';
 
 const IMAGES_QUERY = gql`
   query($filter: ImageFilter, $first: Int, $skip: Int) {
@@ -67,6 +68,7 @@ class ImagesWebsite extends Component {
         <div className="ml-auto pl-8 pr-8 pt-8" style={maxWidth}>
           <HeaderContent/>
           <ProductInfo/>
+          {/* <Elements/> */}
           <ImagesGrid
             hasMore={this.state.hasMore}
             fetchImages={this.fetchImages}

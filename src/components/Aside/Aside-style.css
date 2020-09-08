@@ -22,6 +22,7 @@
 }
 .nav-link_active {
   font-weight: bold;
+  color: #63b3ed;
 }
 .nav-link_active::before {
   content: '';
@@ -29,6 +30,6 @@
   top: 0;
   left: 0;
   bottom: 0;
-  background-color: black;
+  background-color: #63b3ed;
   width: 4px;
 }

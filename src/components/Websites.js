@@ -66,8 +66,8 @@ class Elements extends Component {
                     </div>
                   })}
                 </div>
-              })}
-            </div>
+            })}
+          </div>
           )
         }}
       </Query>

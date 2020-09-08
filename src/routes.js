@@ -18,7 +18,8 @@ import makeApolloClient from "./apollo";
 import ImagesPatterns from "./components/ImagesPatterns";
 
 import Content from './components/Content/';
-import Aside from './components/Aside/';
+
+
 
 let client;
 
@@ -90,11 +91,11 @@ export const makeMainRoutes = () => {
                     }}
                 />
                 {/* this is mocked temporary route */}
-                
+{/*                 
                 <Route
                     path="/content"
                     render={props => provideClient(Content, props)}
-                />
+                /> */}
         </Router>
     );
 };
