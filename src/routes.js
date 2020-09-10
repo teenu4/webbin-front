@@ -18,6 +18,7 @@ import ImagesPatterns from "./components/ImagesPatterns";
 
 import Aside from './components/Aside/';
 import Content from './components/Content/'
+import LoginPage  from './components/Auth/LoginPage';
 
 let client;
 
@@ -36,21 +37,21 @@ const provideClient = (Component, renderProps) => {
         );
     } else {
         // not logged in already, hence redirect to login page
-        if (renderProps.match.path !== "/") {
-            window.location.href = "/";
-        } else {
+        // if (renderProps.match.path !== "/") {
+        //     window.location.href = "/";
+        // } else {
             return (<ApolloProvider client={client}>
-                <Component auth={auth} {...renderProps} />
+                <Component {...renderProps} client={client} />
             </ApolloProvider>);
-        }
+        // }
     }
 };
 
-const handleAuthentication = ({ location }) => {
-    if (/access_token|id_token|error/.test(location.hash)) {
-        auth.handleAuthentication();
-    }
-};
+// const handleAuthentication = ({ location }) => {
+//     if (/access_token|id_token|error/.test(location.hash)) {
+//         auth.handleAuthentication();
+//     }
+// };
 
 export const makeMainRoutes = () => {
     return (
@@ -81,12 +82,17 @@ export const makeMainRoutes = () => {
                     path="/home"
                     render={props => provideClient(Home, props)}
                 />
-                <Route
+                {/* <Route
                     path="/callback"
                     render={props => {
                         handleAuthentication(props);
                         return <Callback {...props} />;
                     }}
+                /> */}
+                <Route
+                    exact
+                    path="/login"
+                    render={props => provideClient(LoginPage, props)}
                 />
                 {/* this is mocked temporary route */}
                 <Route

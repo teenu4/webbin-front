@@ -12,7 +12,7 @@ import auth from "./components/Auth/Auth";
 
 const getHeaders = () => {
   const headers = {};
-  const token = auth.getIdToken();
+  const token = localStorage.getItem('token');
   if (token) {
     headers.authorization = `Bearer ${token}`;
   }
