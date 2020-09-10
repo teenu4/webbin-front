@@ -1,11 +1,6 @@
 import React from "react";
 import { Route, Router } from "react-router-dom";
 
-import Home from "./components/Home/Home";
-import Callback from "./components/Callback/Callback";
-import auth from "./components/Auth/Auth";
-
-// import LandingPage from "./components/LandingPage/LandingPage";
 import Websites from "./components/Websites";
 import Website from "./components/Website";
 import Image from "./components/Image";
@@ -17,9 +12,8 @@ import makeApolloClient from "./apollo";
 // import Patterns from "./components/ImagesPatterns";
 import ImagesPatterns from "./components/ImagesPatterns";
 
-import Content from './components/Content/';
-
-
+import Content from './components/Content/'
+import LoginPage from './components/Auth/LoginPage';
 
 let client;
 
@@ -27,75 +21,48 @@ const provideClient = (Component, renderProps) => {
     if (!client) {
         client = makeApolloClient();
     }
-    // check if logged in
-    if (localStorage.getItem("isLoggedIn") === "true") {
-        // check if client exists
+    return (
+        <ApolloProvider client={client}>
+            <Component {...renderProps} client={client} />
+        </ApolloProvider>
+    );
 
-        return (
-            <ApolloProvider client={client}>
-                <Component {...renderProps} auth={auth} client={client} />
-            </ApolloProvider>
-        );
-    } else {
-        // not logged in already, hence redirect to login page
-        // if (renderProps.match.path !== "/") {
-        //     window.location.href = "/";
-        // } else {
-            return (<ApolloProvider client={client}>
-                <Component auth={auth} {...renderProps} client={client} />
-            </ApolloProvider>);
-        // }
-    }
-};
-
-const handleAuthentication = ({ location }) => {
-    if (/access_token|id_token|error/.test(location.hash)) {
-        auth.handleAuthentication();
-    }
 };
 
 export const makeMainRoutes = () => {
     return (
         <Router history={history}>
-            
-                <Route
-                    exact
-                    path="/"
-                    render={props => provideClient(Websites, props)}
-                />
-                <Route
-                    exact
-                    path="/patterns"
-                    render={props => provideClient(ImagesPatterns, props)}
-                />
-                <Route
-                    path="/websites/:id"
-                    render={props => provideClient(Website, props)}
-                // render={id => this.getRecipe(id)}
-                />
-                <Route
-                    path="/images/:id"
-                    render={props => provideClient(Image, props)}
-                // render={id => this.getRecipe(id)}
-                />
-                <Route
-                    exact
-                    path="/home"
-                    render={props => provideClient(Home, props)}
-                />
-                <Route
-                    path="/callback"
-                    render={props => {
-                        handleAuthentication(props);
-                        return <Callback {...props} />;
-                    }}
-                />
-                {/* this is mocked temporary route */}
-{/*                 
-                <Route
-                    path="/content"
-                    render={props => provideClient(Content, props)}
-                /> */}
+
+            <Route
+                exact
+                path="/"
+                render={props => provideClient(Websites, props)}
+            />
+            <Route
+                exact
+                path="/patterns"
+                render={props => provideClient(ImagesPatterns, props)}
+            />
+            <Route
+                path="/websites/:id"
+                render={props => provideClient(Website, props)}
+            // render={id => this.getRecipe(id)}
+            />
+            <Route
+                path="/images/:id"
+                render={props => provideClient(Image, props)}
+            // render={id => this.getRecipe(id)}
+            />
+            <Route
+                exact
+                path="/login"
+                render={props => provideClient(LoginPage, props)}
+            />
+            {/* this is mocked temporary route */}
+            <Route
+                path="/content"
+                render={props => provideClient(Content, props)}
+            />
         </Router>
     );
 };

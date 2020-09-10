@@ -1,18 +1,11 @@
 import ApolloClient from "apollo-client";
 import { HttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
-// import { WebSocketLink } from "apollo-link-ws";
-// import { split } from "apollo-link";
-// import { getMainDefinition } from "apollo-utilities";
-// import { SubscriptionClient } from "subscriptions-transport-ws";
-
-// import { GRAPHQL_URL, REALTIME_GRAPHQL_URL } from "./utils/constants.js";
 import { GRAPHQL_URL } from "./utils/constants.js";
-import auth from "./components/Auth/Auth";
 
 const getHeaders = () => {
   const headers = {};
-  const token = auth.getIdToken();
+  const token = localStorage.getItem('token');
   if (token) {
     headers.authorization = `Bearer ${token}`;
   }
@@ -26,34 +19,6 @@ const makeApolloClient = () => {
     fetch,
     headers: getHeaders()
   });
-
-  // Create a WebSocket link:
-//   const wsLink = new WebSocketLink(
-//     new SubscriptionClient(REALTIME_GRAPHQL_URL, {
-//       reconnect: true,
-//       timeout: 30000,
-//       connectionParams: () => {
-//         return { headers: getHeaders() };
-//       },
-//       connectionCallback: err => {
-//         if (err) {
-//           wsLink.subscriptionClient.close(false, false);
-//         }
-//       }
-//     })
-//   );
-
-  // chose the link to use based on operation
-//   const link = split(
-//     // split based on operation type
-//     ({ query }) => {
-//       const { kind, operation } = getMainDefinition(query);
-//       return kind === "OperationDefinition" && operation === "subscription";
-//     },
-//     wsLink,
-//     httpLink
-//   );
-
 
   const client = new ApolloClient({
     shouldBatch: true,
