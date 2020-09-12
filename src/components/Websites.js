@@ -1,15 +1,8 @@
+import gql from 'graphql-tag';
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
-import gql from 'graphql-tag';
+import { Link } from "react-router-dom";
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams,
-  useRouteMatch
-} from "react-router-dom";
 
 //let { path, url } = useRouteMatch();
 
@@ -50,7 +43,9 @@ class Elements extends Component {
                     <img className="w-24" src={website.logoUrl} alt="Display" />
                     <div className="px-6 py-4">
                       <div className="font-bold text-purple-500 text-xl mb-2">
-                        {website.name}
+                        <Link to={"/websites/" + website.id}>
+                          {website.name}
+                        </Link>
                       </div>
                       <p className="text-gray-700 text-base">
                         {website.description}
@@ -66,8 +61,8 @@ class Elements extends Component {
                     </div>
                   })}
                 </div>
-            })}
-          </div>
+              })}
+            </div>
           )
         }}
       </Query>

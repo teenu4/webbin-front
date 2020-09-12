@@ -33,17 +33,6 @@ class Website extends Component {
           return (
 
             <div className="flex flex-wrap mb-4">
-              <div className="rounded overflow-hidden shadow-lg">
-                <img className="w-24" src={data.website.logoUrl} alt="Display" />
-                <div className="px-6 py-4">
-                  <div className="font-bold text-purple-500 text-xl mb-2">
-                    {data.website.name}
-                  </div>
-                  <p className="text-gray-700 text-base">
-                    {data.website.description}
-                  </p>
-                </div>
-              </div>
               <ImagesWebsite
                 client={this.props.client}
                 websiteId={this.props.match.params.id} />

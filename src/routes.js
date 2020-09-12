@@ -12,7 +12,6 @@ import makeApolloClient from "./apollo";
 // import Patterns from "./components/ImagesPatterns";
 import ImagesPatterns from "./components/ImagesPatterns";
 
-import Content from './components/Content/'
 import LoginPage from './components/Auth/LoginPage';
 
 let client;
@@ -57,11 +56,6 @@ export const makeMainRoutes = () => {
                 exact
                 path="/login"
                 render={props => provideClient(LoginPage, props)}
-            />
-            {/* this is mocked temporary route */}
-            <Route
-                path="/content"
-                render={props => provideClient(Content, props)}
             />
         </Router>
     );

@@ -4,8 +4,7 @@ import { IMAGES_PER_PAGE } from '../utils/constants';
 import ImagePatternGridItem from './ImagePatternGridItem';
 
 import ImagesGrid from './ImagesGrid';
-import HeaderContent from './Content/HeaderContent';
-import ProductInfo from './Content/ProductInfo';
+import HeaderContent from './Content/HeaderContent/HeaderContent';
 
 
 const IMAGES_QUERY = gql`
@@ -61,16 +60,15 @@ class ImagesPatterns extends Component {
     return (
       <div>
         {/* these components will be moved to parent component */}
-        <HeaderContent/>
-        <ProductInfo/>
+        <HeaderContent />
         <ImagesGrid
-        hasMore={this.state.hasMore}
-        fetchImages={this.fetchImages}
-        dataLength={this.state.images.length}
-        images={this.state.images}
-        itemComponent={ImagePatternGridItem} />
+          hasMore={this.state.hasMore}
+          fetchImages={this.fetchImages}
+          dataLength={this.state.images.length}
+          images={this.state.images}
+          itemComponent={ImagePatternGridItem} />
       </div>
-      
+
     );
   }
 }
