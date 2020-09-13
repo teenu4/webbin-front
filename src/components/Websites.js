@@ -20,7 +20,7 @@ const WEBSITES_QUERY = gql`
     }
   }
 `;
-class Elements extends Component {
+class Websites extends Component {
 
   constructor() {
     super();
@@ -69,4 +69,4 @@ class Elements extends Component {
     )
   }
 }
-export default Elements;
+export default Websites;

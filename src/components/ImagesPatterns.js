@@ -14,9 +14,11 @@ const IMAGES_QUERY = gql`
         previewUrl
         displayName
         website {
+          id
           name
         }
         patterns {
+          id
           name
         }
       }
