@@ -5,7 +5,11 @@ import ImagePatternGridItem from './ImagePatternGridItem';
 
 import ImagesGrid from './ImagesGrid';
 import HeaderContent from './Content/HeaderContent/HeaderContent';
+import Aside from './Aside/';
 
+import FilterSidebar from './Filters/FilterSidebar';
+import ActiveFilters from './Filters/ActiveFilters';
+import FilterFillerService from '../services/filters/FilterFillerService';
 
 const IMAGES_QUERY = gql`
   query($filter: ImageFilter, $first: Int, $skip: Int) {
@@ -30,7 +34,10 @@ class ImagesPatterns extends Component {
     images: [],
     first: IMAGES_PER_PAGE,
     skip: 0,
-    hasMore: true
+    hasMore: true,
+    sidebar: { component: Aside },
+    activeFilters: {},
+    filter: {}
   };
 
   componentDidMount() {
@@ -44,12 +51,41 @@ class ImagesPatterns extends Component {
         variables: {
           first: this.state.first,
           skip: this.state.skip,
-          filter: {
-            // websiteId: 1
-          }
+          filter: this.state.filter
         }
       }).then(result => this.setState({ images: this.state.images.concat(result.data.allImages), hasMore: !!result.data.allImages.length }));
 
+  }
+
+  changeActiveFilters = (id, name, filterType) => {
+    let current = this.state.activeFilters;
+    if (current[filterType] === undefined) {
+      current[filterType] = []
+    }
+    const value = { id: id, name: name };
+    const index = current[filterType].findIndex(i => i.id === id);
+    if (index === -1) {
+      current[filterType].push(value);
+    } else {
+      current[filterType].splice(index, 1);
+      if (current[filterType].length === 0) delete current[filterType];
+    }
+    this.setState({ activeFilters: current, images: [], hasMore: true, skip: 0, filter: FilterFillerService.getFilters(current) }, () => {
+      this.runImagesQuery();
+    });
+  }
+
+  filterButtonClick = (e) => {
+    const type = e.target.textContent;
+    this.setState({
+      sidebar: {
+        component: FilterSidebar,
+        type: type
+      }
+    });
+    // this.props.history.push({
+    //   search: "?" + new URLSearchParams(params).toString()
+    // })
   }
 
   fetchImages = () => {
@@ -59,17 +95,34 @@ class ImagesPatterns extends Component {
   };
 
   render() {
+    const maxWidth = {
+      width: "calc(100% - 260px)",
+    };
     return (
-      <div>
-        {/* these components will be moved to parent component */}
-        <HeaderContent />
-        <ImagesGrid
-          hasMore={this.state.hasMore}
-          fetchImages={this.fetchImages}
-          dataLength={this.state.images.length}
-          images={this.state.images}
-          itemComponent={ImagePatternGridItem} />
-      </div>
+      <>
+        {/* TODO: move filter buttons to separate component */}
+        <this.state.sidebar.component
+          type={this.state.sidebar.type}
+          filterChange={this.changeActiveFilters}
+          activeFilters={this.state.activeFilters} />
+        <div className="ml-auto pl-8 pr-8 pt-8" style={maxWidth}>
+          <HeaderContent />
+          <button onClick={this.filterButtonClick} className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
+            Patterns
+          </button>
+          <button onClick={this.filterButtonClick} className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
+            Elements
+          </button>
+          <ActiveFilters activeFilters={this.state.activeFilters} />
+
+          <ImagesGrid
+            hasMore={this.state.hasMore}
+            fetchImages={this.fetchImages}
+            dataLength={this.state.images.length}
+            images={this.state.images}
+            itemComponent={ImagePatternGridItem} />
+        </div>
+      </>
 
     );
   }

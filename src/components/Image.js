@@ -39,7 +39,7 @@ class Image extends Component {
     //console.log(this.props);
   }
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     return (
 
       <Query query={IMAGE_QUERY}

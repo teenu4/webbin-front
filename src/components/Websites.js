@@ -25,10 +25,8 @@ class Websites extends Component {
   constructor() {
     super();
     this.state = { session: false };
-    //console.log(this.props);
   }
   render() {
-    console.log(this.props);
     return (
 
       <Query query={WEBSITES_QUERY}>

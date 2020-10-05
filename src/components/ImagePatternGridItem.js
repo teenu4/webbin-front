@@ -11,7 +11,7 @@ class ImagePatternGridItem extends Component {
           <Link to={"/images/" + this.props.image.id}>
             <div className="font-bold text-xl mb-2">{this.props.image.website.name}</div>
           </Link>
-          {this.props.image.patterns.map(p => <p>{p.name}</p>)}
+          {this.props.image.patterns.map(p => <p key={p.id}>{p.name}</p>)}
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
             Like
           </button>
