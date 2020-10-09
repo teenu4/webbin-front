@@ -1,23 +1,13 @@
-import gql from 'graphql-tag';
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
-import FilterOption from './FilterOption';
+import FilterFillerService from '../../services/filters/FilterFillerService';
+import FilterOptions from './FilterOptions';
 
 class FilterSidebar extends Component {
 
-  getQuery = () => {
-    const query = `
-      {
-      all${this.props.type} {
-        id
-        name
-      }
-    }`;
-    return gql(query);
-  }
-
   render() {
-    //console.log(this.getQueries());
+    //console.log(this.props);
+    //console.log(FilterFillerService.getFilterVariable(this.props.activeFilters), this.props.type);
     return (
       <>
         <div>
@@ -25,14 +15,22 @@ class FilterSidebar extends Component {
 
         </div>
         <Query
-          query={this.getQuery()}>
+          query={FilterFillerService.getSidebarQuery(this.props.type)}
+          // check if this works
+          fetchPolicy="cache-and-network"
+          variables={{
+            filter: FilterFillerService.getFilterVariable(this.props.activeFilters),
+            // force fetch new counts every time
+            //v: Math.random()
+            //type: this.props.type
+          }}>
           {({ loading, error, data }) => {
             if (loading) return <div>Fetching..</div>
             if (error) return <div>Error!</div>
             return (
               <>
 
-                <FilterOption
+                <FilterOptions
                   data={data[`all${this.props.type}`]}
                   name={this.props.type}
                   filterChange={this.props.filterChange}

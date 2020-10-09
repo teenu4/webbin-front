@@ -58,7 +58,7 @@ class ImagesPatterns extends Component {
   }
 
   changeActiveFilters = (id, name, filterType) => {
-    let current = this.state.activeFilters;
+    let current = Object.assign({}, this.state.activeFilters);
     if (current[filterType] === undefined) {
       current[filterType] = []
     }
@@ -70,7 +70,7 @@ class ImagesPatterns extends Component {
       current[filterType].splice(index, 1);
       if (current[filterType].length === 0) delete current[filterType];
     }
-    this.setState({ activeFilters: current, images: [], hasMore: true, skip: 0, filter: FilterFillerService.getFilters(current) }, () => {
+    this.setState({ activeFilters: current, images: [], hasMore: true, skip: 0, filter: FilterFillerService.getFilterVariable(current) }, () => {
       this.runImagesQuery();
     });
   }
@@ -83,6 +83,7 @@ class ImagesPatterns extends Component {
         type: type
       }
     });
+    // store query params in url like this (if needed in future)
     // this.props.history.push({
     //   search: "?" + new URLSearchParams(params).toString()
     // })
@@ -108,12 +109,17 @@ class ImagesPatterns extends Component {
         <div className="ml-auto pl-8 pr-8 pt-8" style={maxWidth}>
           <HeaderContent />
           <button onClick={this.filterButtonClick} className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
+            Categories
+          </button>
+          <button onClick={this.filterButtonClick} className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
             Patterns
           </button>
           <button onClick={this.filterButtonClick} className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
             Elements
           </button>
-          <ActiveFilters activeFilters={this.state.activeFilters} />
+          <ActiveFilters
+            filterChange={this.changeActiveFilters}
+            activeFilters={this.state.activeFilters} />
 
           <ImagesGrid
             hasMore={this.state.hasMore}
