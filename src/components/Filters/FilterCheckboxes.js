@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class FilterOptions extends Component {
+class FilterCheckboxes extends Component {
 
   handleChange = (e) => {
     const name = this.props.name;
@@ -41,4 +41,4 @@ class FilterOptions extends Component {
   }
 }
 
-export default FilterOptions;
+export default FilterCheckboxes;

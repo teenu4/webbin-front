@@ -10,6 +10,7 @@ import Aside from './Aside/';
 import FilterSidebar from './Filters/FilterSidebar';
 import ActiveFilters from './Filters/ActiveFilters';
 import FilterFillerService from '../services/filters/FilterFillerService';
+import FilterButtons from './Filters/FilterButtons';
 
 const IMAGES_QUERY = gql`
   query($filter: ImageFilter, $first: Int, $skip: Int) {
@@ -58,28 +59,18 @@ class ImagesPatterns extends Component {
   }
 
   changeActiveFilters = (id, name, filterType) => {
-    let current = Object.assign({}, this.state.activeFilters);
-    if (current[filterType] === undefined) {
-      current[filterType] = []
-    }
-    const value = { id: id, name: name };
-    const index = current[filterType].findIndex(i => i.id === id);
-    if (index === -1) {
-      current[filterType].push(value);
-    } else {
-      current[filterType].splice(index, 1);
-      if (current[filterType].length === 0) delete current[filterType];
-    }
+    const current = FilterFillerService.getEditedActiveFilters(this.state.activeFilters, id, name, filterType);
     this.setState({ activeFilters: current, images: [], hasMore: true, skip: 0, filter: FilterFillerService.getFilterVariable(current) }, () => {
       this.runImagesQuery();
     });
   }
 
-  filterButtonClick = (e) => {
+  sidebarChangeClick = (e) => {
     const type = e.target.textContent;
+    const component = type === 'Close' ? Aside : FilterSidebar;
     this.setState({
       sidebar: {
-        component: FilterSidebar,
+        component: component,
         type: type
       }
     });
@@ -101,22 +92,17 @@ class ImagesPatterns extends Component {
     };
     return (
       <>
-        {/* TODO: move filter buttons to separate component */}
         <this.state.sidebar.component
           type={this.state.sidebar.type}
           filterChange={this.changeActiveFilters}
-          activeFilters={this.state.activeFilters} />
+          activeFilters={this.state.activeFilters}
+          sidebarChangeClick={this.sidebarChangeClick} />
         <div className="ml-auto pl-8 pr-8 pt-8" style={maxWidth}>
           <HeaderContent />
-          <button onClick={this.filterButtonClick} className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
-            Categories
-          </button>
-          <button onClick={this.filterButtonClick} className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
-            Patterns
-          </button>
-          <button onClick={this.filterButtonClick} className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
-            Elements
-          </button>
+          <FilterButtons
+            filterNames={['Categories', 'Patterns', 'Elements']}
+            clickFunction={this.sidebarChangeClick}
+          />
           <ActiveFilters
             filterChange={this.changeActiveFilters}
             activeFilters={this.state.activeFilters} />
