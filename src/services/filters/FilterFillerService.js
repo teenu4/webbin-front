@@ -30,14 +30,14 @@ const FilterFillerService = {
         return current;
     },
 
-    getFilterVariable(activeFilters) {
+    getFilterVariable(activeFilters, additional = {}) {
         let result = {};
         Object.keys(activeFilters).forEach(key => {
             result[FILTER_MAPPING[key].keyName] = [];
             activeFilters[key].map(h =>
                 result[FILTER_MAPPING[key].keyName].push(h.id));
         });
-        return result;
+        return Object.assign(result, additional);
     },
 
     getSidebarQuery(type) {

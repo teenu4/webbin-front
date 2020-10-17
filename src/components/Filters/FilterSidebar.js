@@ -23,7 +23,7 @@ class FilterSidebar extends Component {
           // check if this works
           fetchPolicy="cache-and-network"
           variables={{
-            filter: FilterFillerService.getFilterVariable(this.props.activeFilters),
+            filter: FilterFillerService.getFilterVariable(this.props.activeFilters, this.props.additionalFilters),
             // force fetch new counts every time
             //v: Math.random()
             //type: this.props.type

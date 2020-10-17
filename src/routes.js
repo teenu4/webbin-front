@@ -2,17 +2,16 @@ import React from "react";
 import { Route, Router } from "react-router-dom";
 
 import Websites from "./components/Websites";
-import Website from "./components/Website";
 import Image from "./components/Image";
 // import App from "./components/App";
 import history from "./utils/history";
 
 import { ApolloProvider } from "react-apollo";
 import makeApolloClient from "./apollo";
-// import Patterns from "./components/ImagesPatterns";
 import ImagesPatterns from "./components/ImagesPatterns";
 
 import LoginPage from './components/Auth/LoginPage';
+import ImagesWebsite from "./components/ImagesWebsite";
 
 let client;
 
@@ -44,7 +43,7 @@ export const makeMainRoutes = () => {
             />
             <Route
                 path="/websites/:id"
-                render={props => provideClient(Website, props)}
+                render={props => provideClient(ImagesWebsite, props)}
             // render={id => this.getRecipe(id)}
             />
             <Route
