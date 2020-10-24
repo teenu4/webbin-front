@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import { Link } from "react-router-dom";
-
+import SortOptions from './Sort/SortOptions';
 
 //let { path, url } = useRouteMatch();
 
@@ -22,10 +22,12 @@ const WEBSITES_QUERY = gql`
 `;
 class Websites extends Component {
 
-  constructor() {
-    super();
-    this.state = { session: false };
+  changeSort = (e) => {
+    console.log(e.target.value);
+    console.log('changeSort');
+
   }
+
   render() {
     return (
 
@@ -35,6 +37,13 @@ class Websites extends Component {
           if (error) return <div>Error!</div>
           return (
             <div>
+              <SortOptions
+                changeSort={this.changeSort}
+                mapping={{
+                  'Date': 'lastUpdate_DESC',
+                  'Name': 'name_ASC'
+                }}
+              />
               {data.allWebsites.map((website) => {
                 return <div key={website.id} className="flex flex-wrap mb-4">
                   <div className="rounded overflow-hidden shadow-lg">

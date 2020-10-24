@@ -42,7 +42,7 @@ export const makeMainRoutes = () => {
                 render={props => provideClient(ImagesPatterns, props)}
             />
             <Route
-                path="/websites/:id"
+                path="/websites/:id/images"
                 render={props => provideClient(ImagesWebsite, props)}
             // render={id => this.getRecipe(id)}
             />
